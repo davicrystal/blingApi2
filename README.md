@@ -6,13 +6,12 @@ SDK em PHP para integração com a API 2 do Bling ERP
 
 REQUERIMENTOS
 =============
-PHP 5.5.3 ou superior
-Curl 7.32
+PHP 5.5.3 ou superior e Curl 7.32
 
 INSTALAÇÃO
 ==========
 
-- Baixe o repositório em seu projeto git clone git@github.com:davicrystal/blingApi2.git
+- Baixe o repositório em seu projeto ```git clone git@github.com:davicrystal/blingApi2.git```
 - Inclua/Importe o script BlingSD.php em sua classe PHP para utilização dos métodos
 
 UTILIZAÇÃO
