@@ -220,6 +220,23 @@ class BlingSDK{
 	}
 
 	/**
+	 * @name getOrders
+	 * @access public
+	 * @internal Consulta pedidos no ERP Bling
+	 * @author Maycon Mesquita
+	 * @param array $arrayFilters -> dataEmissao[12/12/2013 TO 05/02/2014]; idSituacao[3];
+	 * @param string $responseFormat (json|xml)
+	 * @return string (json|xml)
+	 */
+
+	public function getOrders($arrayFilters = NULL, $responseFormat = 'xml'){
+
+		// EXECUTA O ENVIO DE DADOS PARA O BLING
+	    return $this->sendDataToBling('pedidos', 'get', $arrayFilters, $responseFormat);
+
+	}
+	
+	/**
 	 * @name getNf
 	 * @access public
 	 * @internal Consulta uma nota fiscal no ERP Bling
@@ -265,7 +282,7 @@ class BlingSDK{
     * @access private
     * @internal Executa o envio de dados ao Bling
     * @author Davi Crystal
-    * @param string $strContext (produto|pedido|notafiscal)
+    * @param string $strContext (produto|pedido|pedidos|notafiscal)
     * @param string $strAction (get|post)
     * @param mix array|string $arrayData
     * @param string $strResponseFormat (json|xml)
@@ -283,8 +300,24 @@ class BlingSDK{
 					// SE O PARÂMETRO FOR INFORMADO COMO STRING O INCLUI NA AÇÃO ENVIADA AO BLING
 					if(is_string($arrayData) && $arrayData)
 						$strOptions = '/' . $arrayData . '/' . $strResponseFormat . '&apikey=' . $this->strApiKey;
-					else 
-						$strOptions = '/' . $strResponseFormat . '&apikey=' . $this->strApiKey;
+					else {
+						// SE O PARÂMETRO FOR UM ARRAY VAZIO, NÃO DEFINE OPÇÕES DE QUERY (FILTRAGEM) NA URL
+						if (empty($arrayData)) {
+							$strOptions = '/' . $strResponseFormat . '&apikey=' . $this->strApiKey;
+						} else { // CASO SEJA UM ARRAY COM CONTEÚDO, PREPARA AS OPÇÕES DE QUERY (FILTRAGEM) NA URL
+							$filter = '';
+
+							foreach ($arrayData as $filterKey => $filterValue) {
+								$filter .= $filterKey . '[' . $filterValue . ']' . '; ';
+							}
+
+							$filter = trim($filter);
+							$filter = rtrim($filter, ";");
+
+							$strOptions  = '/' . $strResponseFormat . '/?apikey=' . $this->strApiKey;
+							$strOptions .= '&filters=' . $filter;
+						}
+					}
 			
 			// SE A REQUISIÇÃO TRATAR-SE DE UM POST PREPARA AS OPÇÕES DA URL
 			}elseif($strAction == 'post'){
