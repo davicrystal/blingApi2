@@ -87,4 +87,6 @@ Manual de integração API 2 Bling: https://www.bling.com.br/manuais-api
 
 COLABORADORES
 =============
-Davi Crystal | Digital UP | davicrystal@gmail.com | http://twitter.com/davicrystal
+Davi Crystal | davicrystal@gmail.com | http://twitter.com/davicrystal
+Maycon Mesquita | https://github.com/mayconmesquita
+
