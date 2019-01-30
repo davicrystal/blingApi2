@@ -65,6 +65,12 @@ Manual de integração API 2 Bling: https://www.bling.com.br/manuais-api
 	- $strProductCode: código do pedido a ser consultado.
 
 	- $responseFormat: informe como deseja a resposta "xml" ou "json".
+	
+- getOrders($arrayFilters, $responseFormat): Método para consulta de Pedidos.
+
+	- $arrayFilters: parâmetros de filtragem a serem enviados ao Bling em forma de array obedecendo o layout do bling.
+
+	- $responseFormat: informe como deseja a resposta "xml" ou "json".
 
 - getNf($strNfNumber, $responseFormat): Método para consulta de Nota Fiscal.
 
